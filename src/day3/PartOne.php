@@ -1,6 +1,8 @@
 <?php
 
-include_once('./src/Three/helper.php');
+use App\GlobalHelpers;
+
+include_once('./src/day3/helper.php');
 
 function partOne()
 {

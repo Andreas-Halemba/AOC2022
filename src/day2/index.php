@@ -90,7 +90,7 @@ namespace App {
 
     function main(): void
     {
-        if (($input = fopen('./src/2/partOne.txt', 'r'))) {
+        if (($input = fopen('./src/day2/partOne.txt', 'r'))) {
             $totalPoints = 0;
             while (($line = fgets($input))) {
                 $picks = array_filter(preg_split('/\s+/', $line));
@@ -154,7 +154,7 @@ namespace App {
     function roundTwo(): void
     {
         $totalPoints = 0;
-        if (($input = fopen('./src/2/partTwo.txt', 'r'))) {
+        if (($input = fopen('./src/day2/partTwo.txt', 'r'))) {
             while (($line = fgets($input))) {
                 $picks = array_filter(preg_split('/\s+/', $line));
                 $oponentPick = $picks[0];

@@ -1,6 +1,6 @@
 <?php
 
-$input = fopen("./src/input.txt", "r");
+$input = fopen("./src/day1/input.txt", "r");
 if ($input) {
     $groupIndex = 0;
     $calories = [];

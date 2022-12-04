@@ -2,7 +2,7 @@
 
 function readInput($lineHandler): array
 {
-    if (($input = fopen('./src/Three/input.txt', 'r'))) {
+    if (($input = fopen('./src/day3/input.txt', 'r'))) {
         $result = [];
         $lineCount = 0;
         while (($line = fgets($input))) {
