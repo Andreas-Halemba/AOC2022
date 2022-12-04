@@ -5,8 +5,6 @@ namespace App {
     use App\Pick as PickEnum;
     use App\Result as ResultEnum;
 
-    use function PHPSTORM_META\map;
-
     enum Pick
     {
         case ROCK;
