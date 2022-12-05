@@ -1,8 +1,6 @@
 <?php
 
-use App\GlobalHelpers;
-
-include_once('./src/day3/helper.php');
+namespace App\day3;
 
 /**
  * @param array<int> $result

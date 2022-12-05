@@ -1,5 +1,7 @@
 <?php
 
+namespace App\day3;
+
 /**
  * Undocumented function
  *

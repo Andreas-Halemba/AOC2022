@@ -6,7 +6,6 @@ use App\GlobalHelpers;
 
 class PartOne extends GlobalHelpers
 {
-
     public int $result = 0;
 
     public function __construct()
