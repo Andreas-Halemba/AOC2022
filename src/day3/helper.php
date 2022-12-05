@@ -1,6 +1,12 @@
 <?php
 
-function readInput($lineHandler): array
+/**
+ * Undocumented function
+ *
+ * @param string $lineHandler
+ * @return array<int|string>
+ */
+function readInput(string $lineHandler): array
 {
     if (($input = fopen('./src/day3/input.txt', 'r'))) {
         $result = [];

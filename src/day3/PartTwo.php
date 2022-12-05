@@ -4,12 +4,18 @@ use App\GlobalHelpers;
 
 include_once('./src/day3/helper.php');
 
-function handleLinePartTwo(&$result, string $line, int $lineCount)
+/**
+ * @param array<int> $result
+ * @param string $line
+ * @param integer $lineCount
+ * @return void
+ */
+function handleLinePartTwo(array &$result, string $line, int $lineCount): void
 {
     $result[] = trim($line);
 }
 
-function partTwo()
+function partTwo(): void
 {
     $lines = readInput('handleLinePartTwo');
 

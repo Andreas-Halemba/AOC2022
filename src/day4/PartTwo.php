@@ -16,7 +16,7 @@ class PartTwo extends GlobalHelpers
         var_dump($this->result);
     }
 
-    public function handleLinePartOne(string $line, int $lineCount)
+    public function handleLinePartOne(string $line, int $lineCount): void
     {
         $cleanLine = trim($line);
         $chunks = explode(',', $cleanLine);

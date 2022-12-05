@@ -15,7 +15,7 @@ class PartOne extends GlobalHelpers
         var_dump($this->result);
     }
 
-    public function handleLinePartOne(string $line, int $lineCount)
+    public function handleLinePartOne(string $line, int $lineCount): void
     {
         $cleanLine = trim($line);
         $chunks = explode(',', $cleanLine);
@@ -27,7 +27,7 @@ class PartOne extends GlobalHelpers
         $groupB = $groups[1];
         if ($groupA[0] <= $groupB[0] && $groupA[1] >= $groupB[1]) {
             $this->result++;
-        } else if ($groupA[0] >= $groupB[0] && $groupA[1] <= $groupB[1]) {
+        } elseif ($groupA[0] >= $groupB[0] && $groupA[1] <= $groupB[1]) {
             $this->result++;
         }
     }

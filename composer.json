@@ -16,5 +16,12 @@
         "friendsofphp/php-cs-fixer": "^3.13",
         "squizlabs/php_codesniffer": "^3.7",
         "phpstan/phpstan": "^1.9"
+    },
+    "scripts": {
+        "day1": "php ./src/day1/index.php",
+        "day2": "php ./src/index.php day2",
+        "day3": "php ./src/index.php day3",
+        "day4": "php ./src/index.php day4",
+        "day5": "php ./src/index.php day5"
     }
 }
