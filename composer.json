@@ -22,6 +22,8 @@
         "day2": "php ./src/index.php day2",
         "day3": "php ./src/index.php day3",
         "day4": "php ./src/index.php day4",
-        "day5": "php ./src/index.php day5"
+        "day5": "php ./src/index.php day5",
+        "day6": "php ./src/index.php day6",
+        "play": "php ./src/index.php"
     }
 }
