@@ -25,5 +25,9 @@
         "day5": "php ./src/index.php day5",
         "day6": "php ./src/index.php day6",
         "play": "php ./src/index.php"
+    },
+    "require": {
+        "monolog/monolog": "^3.2",
+        "lunatic/monolog-bunyan-formatter": "^0.1.0"
     }
 }
