@@ -55,7 +55,6 @@ class Day8
                     ];
                     $views = [];
                     foreach ($treesAround as $direction => $nextTreeDirection) {
-                        // var_dump($nextTreeDirection);
                         foreach ($nextTreeDirection as $distance => $treeHeight) {
                             if ($treeHeight < $tree) {
                                 $views[$direction] = $distance + 1;
