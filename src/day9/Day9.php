@@ -37,9 +37,9 @@ class Day9
                 foreach ($this->tailPosition as $tailnumber => $tail) {
                     $this->currentTail = $tailnumber;
                     $this->calcHeadTailDistance();
-                    if ($tailnumber === 2) {
-                        $this->printMap($this->tailMap[$tailnumber]);
-                    }
+                    // if ($tailnumber === 1) {
+                    //     $this->printMap($this->tailMap[$tailnumber]);
+                    // }
                 }
             }
         });
