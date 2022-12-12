@@ -4,27 +4,34 @@ namespace App\day11;
 
 class Day11
 {
+    /**
+     * @var Monkey[] $monkeys
+     */
     private array $monkeys;
+
+    private array $inspectionCounter;
 
     public function __construct(string $env = "test")
     {
         $file = file(__DIR__ . DIRECTORY_SEPARATOR . $env . ".txt", FILE_IGNORE_NEW_LINES);
         $this->prepareMonkeys($file);
-        for ($i = 0; $i < 1; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             foreach ($this->monkeys as $number => $monkey) {
                 /** @var Monkey $monkey */
-                $monkey->checkItems($this->monkeys);
+                $monkey->checkItems($this->monkeys, $this->inspectionCounter,  $i);
+                // print_r(array_column($this->monkeys, 'items'));
             }
         }
+        arsort($this->inspectionCounter);
+        var_dump(
+            array_product(array_slice($this->inspectionCounter, 0,2))
+        );
     }
 
     private function prepareMonkeys(array $file): void
     {
-        foreach ($file as $lineNumber => $line) {
-            if ($line === '') {
-                $monkeyBlocks[] = array_slice($file, $lineNumber - 6, 6);
-            }
-        }
+        $file = array_values(array_filter($file, fn ($line) => !empty($line)));
+        $monkeyBlocks = array_chunk($file, 6);
         foreach ($monkeyBlocks as $monkeyNumber => $monkeyInfo) {
             preg_match_all('/(\d{2})/', $monkeyInfo[1], $items);
             array_shift($items);
@@ -40,8 +47,9 @@ class Day11
 
             preg_match('/(\d+)/', $monkeyInfo[5], $testFalse);
             array_shift($testFalse);
+            $this->inspectionCounter[$monkeyNumber] = 0;
 
-            $this->monkeys[] = new Monkey($items[0], $operation, [$testCondition, $testTrue, $testFalse]);
+            $this->monkeys[$monkeyNumber] = new Monkey($monkeyNumber, $items[0], $operation, [$testCondition[0], $testTrue[0], $testFalse[0]]);
         }
     }
 }

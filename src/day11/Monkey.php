@@ -5,15 +5,21 @@ namespace App\day11;
 class Monkey
 {
     public function __construct(
+        public int $id,
         public array $items,
-        public array $operation,
+        private array $operation,
         private array $test
     ) {
     }
 
-    public function checkItems(&$monkeys)
+    /**
+     * @param Monkey[] $monkeys
+     * @return void
+     */
+    public function checkItems(&$monkeys, &$counter, $round)
     {
         foreach ($this->items as $item) {
+            var_dump(substr((string)$item,0, strpos((string)$item, 'E')));
             $itemOperation = $this->operation;
             array_walk($itemOperation, fn (&$value) => $value = str_replace('old', $item, $value));
 
@@ -24,16 +30,24 @@ class Monkey
                 $new = array_product([$itemOperation[0], $itemOperation[2]]);
             }
 
-            var_dump([join(' ', $itemOperation), $new, $this->test]);
+            $counter[$this->id]++;
+
+            if ((floor($new / 3) % $this->test[0]) === 0) {
+                $this->removeFirstItem();
+                $monkeys[$this->test[1]]->addItem(floor($new / 3));
+            } else {
+                $this->removeFirstItem();
+                $monkeys[$this->test[2]]->addItem(floor($new / 3));
+            }
         }
     }
 
-    public function addItem(int $item): void
+    public function addItem(float $item): void
     {
         $this->items[] = $item;
     }
 
-    public function removeFirstItem(): int
+    public function removeFirstItem(): float
     {
         return array_shift($this->items);
     }
