@@ -11,20 +11,29 @@ class Day11
 
     private array $inspectionCounter;
 
+    public int $totalModul;
+
     public function __construct(string $env = "test")
     {
         $file = file(__DIR__ . DIRECTORY_SEPARATOR . $env . ".txt", FILE_IGNORE_NEW_LINES);
         $this->prepareMonkeys($file);
-        for ($i = 0; $i < 30; $i++) {
-            foreach ($this->monkeys as $number => $monkey) {
+        $modulos = [];
+        for ($i = 0; $i < count($this->monkeys); $i++) {
+            $modulos[] = $this->monkeys[$i]->getModulo();
+        }
+        $this->totalModul = array_product($modulos);
+        var_dump($modulos, $this->totalModul);
+        for ($i = 0; $i < 10000; $i++) {
+            foreach ($this->monkeys as $monkey) {
                 /** @var Monkey $monkey */
-                $monkey->checkItems($this->monkeys, $this->inspectionCounter,  $i);
+                $monkey->checkItems($this->monkeys, $this->inspectionCounter, $this->totalModul);
                 // print_r(array_column($this->monkeys, 'items'));
             }
         }
         arsort($this->inspectionCounter);
+        var_dump($this->inspectionCounter);
         var_dump(
-            array_product(array_slice($this->inspectionCounter, 0,2))
+            array_product(array_slice($this->inspectionCounter, 0, 2))
         );
     }
 
