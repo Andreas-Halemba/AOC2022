@@ -25,4 +25,9 @@ class GlobalHelpers
             }
         }
     }
+    
+    public static function nl(string $string): void
+    {
+        print_r($string . PHP_EOL);
+    }
 }
