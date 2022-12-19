@@ -12,6 +12,8 @@ use App\day8\Day8;
 use App\day9\Day9;
 use App\day10\Day10;
 use App\day11\Day11;
+use App\day12\Day12;
+use App\day14\Day14;
 use App\day15\Day15;
 
 match ($argv[1]) {
@@ -25,6 +27,8 @@ match ($argv[1]) {
     'day9' => new Day9($argv[2]),
     'day10' => new Day10($argv[2] ?? null),
     'day11' => new Day11($argv[2] ?? 'test'),
-    'day15' => (new Day15($argv[2] ?? null))->solve(),
+    'day12' => (new Day12($argv[2] ?? 'test'))->solve(),
+    'day14' => (new Day14($argv[2] ?? 'test'))->solve(),
+    'day15' => (new Day15($argv[2] ?? null))->solve(1),
     default => print_r("wrong day given")
 };

@@ -12,9 +12,12 @@ class PartTwo extends GlobalHelpers
     {
         // $this->readTestInput('handleLinePartOne', 'day4');
         $this->readInput('handleLinePartOne', 'day4');
-        var_dump($this->result);
     }
 
+    public function getResult(): int
+    {
+        return $this->result;
+    }
     public function handleLinePartOne(string $line, int $lineCount): void
     {
         $cleanLine = trim($line);

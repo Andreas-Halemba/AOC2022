@@ -15,8 +15,14 @@ class Day8
         $lines = file(__DIR__ . "/input.txt", 2);
         $this->treeMap = array_map(fn ($line) => str_split($line), $lines);
         array_walk($this->treeMap, fn ($items, $index) => $this->walkTrees($items, $index, 0));
-        var_dump($this->visibleTrees);
-        var_dump(max($this->scenicScores));
+    }
+
+    public function solve()
+    {
+        return [
+            $this->visibleTrees,
+            max($this->scenicScores)
+        ];
     }
 
     public function walkTrees($tree, $index, $row)

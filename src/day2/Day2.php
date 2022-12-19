@@ -8,8 +8,14 @@ class Day2
 {
     public function __construct()
     {
-        $this->roundOne();
-        $this->roundTwo();
+    }
+
+    public function solve()
+    {
+        return [
+            $this->roundOne(),
+            $this->roundTwo()
+        ];
     }
 
     private function getPick(string $pick): int
@@ -110,7 +116,7 @@ class Day2
         };
     }
 
-    private function roundOne(): void
+    private function roundOne(): int
     {
         if (($input = fopen('./src/day2/partOne.txt', 'r'))) {
             $totalPoints = 0;
@@ -123,11 +129,11 @@ class Day2
                     default => throw new Exception("Invalid data given"),
                 };
             }
-            echo "\nTotal points: " . $totalPoints;
+            return $totalPoints;
         }
     }
 
-    private function roundTwo(): void
+    private function roundTwo(): int
     {
         $totalPoints = 0;
         if (($input = fopen('./src/day2/partTwo.txt', 'r'))) {
@@ -139,8 +145,6 @@ class Day2
                 $totalPoints += ($resultPoints + $playerPickPionts);
             }
         }
-        var_dump([
-            'totalPoints' => $totalPoints,
-        ]);
+        return $totalPoints;
     }
 }

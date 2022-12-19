@@ -45,7 +45,11 @@ class Day9
         });
         array_walk_recursive($this->tailMap[0], fn ($value) => $this->total[0]++);
         array_walk_recursive($this->tailMap[8], fn ($value) => $this->total[1]++);
-        var_dumP($this->total);
+    }
+
+    public function solve()
+    {
+        return $this->total;
     }
 
     public function printMap($map)

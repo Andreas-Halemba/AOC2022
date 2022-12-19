@@ -16,7 +16,12 @@ class Day7
         } else {
             $this->file = file('./src/day7/input.txt', FILE_IGNORE_NEW_LINES);
         }
-        $this->parseFile();
+    }
+
+    public function solve()
+    {
+        $result = $this->parseFile();
+        return [$result[0], $result[1]];
     }
 
     public function parseFile()
@@ -28,11 +33,13 @@ class Day7
         [$tree, $_] = $this->processLines(array_values($lines), []);
         [$totalSize, $folderSizeList] = $this->calcDirSizes($tree, []);
         $relevantFoldersList = array_filter($folderSizeList, fn ($size) => $size <= 100000);
-        var_dump(array_sum($relevantFoldersList));
         $requiredSpace = 30000000 - (70000000 - $totalSize);
         $deletableFolders = array_filter($folderSizeList, fn ($folderSize) => $folderSize > $requiredSpace);
         asort($deletableFolders);
-        var_dump($deletableFolders);
+        return [
+            $totalSize,
+            join('|', $deletableFolders)
+        ];
     }
 
     public function processLines(array $lines, array $tree): array

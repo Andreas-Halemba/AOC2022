@@ -11,7 +11,11 @@ class PartOne extends GlobalHelpers
     public function __construct()
     {
         self::readInput('handleLinePartOne', 'day4');
-        var_dump($this->result);
+    }
+
+    public function getResult(): int
+    {
+        return $this->result;
     }
 
     public function handleLinePartOne(string $line, int $lineCount): void

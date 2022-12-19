@@ -8,8 +8,14 @@ class Day3
 
     public function __construct()
     {
-        var_dump(array_sum($this->partOne()));
-        var_dump(array_sum($this->partTwo()));
+    }
+
+    public function solve()
+    {
+        return [
+            array_sum($this->partOne()),
+            array_sum($this->partTwo()),
+        ];
     }
 
     public function partOne(): array

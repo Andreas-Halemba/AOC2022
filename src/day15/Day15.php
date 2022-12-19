@@ -36,9 +36,26 @@ class Day15
         }
     }
 
-    public function solve($part)
+    public function solve()
     {
-        foreach ($this->data as $line => $coords) {
+        $range = $this->part1();
+        nl("solution part 1 = " . $range);
+        for ($i = 0; $i < $this->maxX; $i++) {
+            $range = $this->getRangesOfLine($this->getSensorGrid(), $i);
+        }
+    }
+
+    public function part1()
+    {
+        /** min max geht so leider nicht ich brauch die range mit allen
+         *  min max und unterbrechnungen. Die overlaps müssen hier gecheckt werden.
+         */
+        return $this->getRangesOfLine($this->getSensorGrid(true), $this->finalLine);
+    }
+
+    public function getSensorGrid(bool $setMinMax = false): array
+    {
+        foreach ($this->data as $coords) {
             ['S' => ['x' => $sx, 'y' => $sy], 'B' => ['x' => $bx, 'y' => $by]] = $coords;
             $distance = abs($sx - $bx) + abs($sy - $by);
             $sensorGrid[] = [
@@ -47,33 +64,18 @@ class Day15
                 'y' => $sy,
                 'bx' => $bx,
                 'by' => $by,
-                'minx' => $sx - $distance,
-                'maxx' => $sx + $distance,
-                'miny' => $sy - $distance,
-                'maxy' => $sy + $distance,
             ];
-            $minx[] = $sx - $distance;
-            $maxx[] = $sx + $distance;
-            $miny[] = $sy - $distance;
-            $maxy[] = $sy + $distance;
+            if ($setMinMax) {
+                $minx[] = $sx - $distance;
+                $maxx[] = $sx + $distance;
+                $miny[] = $sy - $distance;
+                $maxy[] = $sy + $distance;
+            }
         }
-        if ($part !== "2") {
-            $this->minX = min($minx);
-            $this->maxX = max($maxx);
-            $this->minY = min($miny);
-            $this->maxY = max($maxy);
-        }
-        /** min max geht so leider nicht ich brauch die range mit allen
-         *  min max und unterbrechnungen. Die overlaps müssen hier gecheckt werden.
-         */
-        $range = $this->getRangesOfLine($sensorGrid, $this->finalLine);
-        nl("solution part 1 = " . $range);
-        for ($i = 0; $i < $this->maxX; $i++) {
-            $range = $this->getRangesOfLine($sensorGrid, $i);
-        }
+        return $sensorGrid;
     }
 
-    public function getRangesOfLine($sensors, $line)
+    public function getRangesOfLine($sensors, $line): int|array
     {
         foreach ($sensors as $sensor) {
             [

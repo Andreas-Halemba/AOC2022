@@ -17,6 +17,10 @@ class Day6
         if (!$test) {
             $this->text = file('./src/day6/input.txt');
         }
+    }
+
+    public function solve()
+    {
         foreach ($this->text as $data) {
             print_r([
                 '4' => $this->findUnique($data, 4),
@@ -24,6 +28,7 @@ class Day6
             ]);
         }
     }
+
     private function findUnique(string $data, int $uniqueCount): int
     {
         for ($i = $uniqueCount; $i < strlen($data); $i++) {

@@ -2,7 +2,7 @@
 <ruleset name="PHP_CodeSniffer">
     <description>The coding standard for our project.</description>
     <rule ref="PSR12"/>
-    <file>src</file>
+    <file>./src/**</file>
     <exclude-pattern>vendor/*</exclude-pattern>
     <arg value="p"/>
 </ruleset>

@@ -22,16 +22,17 @@ class Day11
             $modulos[] = $this->monkeys[$i]->getModulo();
         }
         $this->totalModul = array_product($modulos);
-        var_dump($modulos, $this->totalModul);
+    }
+
+    public function solve()
+    {
         for ($i = 0; $i < 10000; $i++) {
             foreach ($this->monkeys as $monkey) {
                 /** @var Monkey $monkey */
                 $monkey->checkItems($this->monkeys, $this->inspectionCounter, $this->totalModul);
-                // print_r(array_column($this->monkeys, 'items'));
             }
         }
         arsort($this->inspectionCounter);
-        var_dump($this->inspectionCounter);
         var_dump(
             array_product(array_slice($this->inspectionCounter, 0, 2))
         );

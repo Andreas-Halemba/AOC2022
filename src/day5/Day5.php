@@ -8,7 +8,13 @@ class Day5
 {
     public function __construct()
     {
-        new PartOne();
-        new PartOne('two');
+    }
+
+    public function solve()
+    {
+        return  [
+            (new PartOne())->getResult(),
+            (new PartOne('two'))->getResult(),
+        ];
     }
 }

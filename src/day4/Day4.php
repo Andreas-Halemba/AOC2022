@@ -6,7 +6,12 @@ class Day4
 {
     public function __construct()
     {
-        new PartOne();
-        new PartTwo();
+    }
+    public function solve()
+    {
+        return [
+            (new PartOne())->getResult(),
+            (new PartTwo())->getResult(),
+        ];
     }
 }

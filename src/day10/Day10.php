@@ -18,6 +18,10 @@ class Day10
 
     public function __construct()
     {
+    }
+
+    public function solve()
+    {
         $file = file(__DIR__ . DIRECTORY_SEPARATOR . "input.txt", FILE_IGNORE_NEW_LINES);
         foreach ($file as $line) {
             $this->processLine($line);

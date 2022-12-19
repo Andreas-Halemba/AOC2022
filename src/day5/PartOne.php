@@ -6,6 +6,8 @@ use App\GlobalHelpers;
 
 class PartOne extends GlobalHelpers
 {
+    public string $result = '';
+
     public function __construct(
         private string $part = 'one',
         private int $storagePlaces = 9,
@@ -51,10 +53,15 @@ class PartOne extends GlobalHelpers
                 $stacks['col' . $to] = array_merge($payloads, $stacks['col' . $to]);
             }
         }
-        $result = '';
         for ($i = 0; $i < $this->storagePlaces; $i++) {
-            $result .= $stacks['col' . ($i + 1)][0];
+            $this->result .= $stacks['col' . ($i + 1)][0];
         }
-        var_dump(str_replace(["[", "]"], '', $result));
+
+        $this->result = str_replace(["[", "]"], '', $this->result);
+    }
+
+    public function getResult(): string
+    {
+        return $this->result;
     }
 }

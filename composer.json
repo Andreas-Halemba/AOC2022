@@ -28,6 +28,7 @@
     },
     "require": {
         "monolog/monolog": "^3.2",
-        "lunatic/monolog-bunyan-formatter": "^0.1.0"
+        "lunatic/monolog-bunyan-formatter": "^0.1.0",
+        "taniko/dijkstra": "^1.1"
     }
 }
