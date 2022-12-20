@@ -118,8 +118,8 @@ class Day2
 
     private function roundOne(): int
     {
+        $totalPoints = 0;
         if (($input = fopen('./src/day2/partOne.txt', 'r'))) {
-            $totalPoints = 0;
             while (($line = fgets($input))) {
                 $picks = array_filter(preg_split('/\s+/', $line));
                 $totalPoints += match ($this->getPick($picks[1])) {
@@ -129,8 +129,8 @@ class Day2
                     default => throw new Exception("Invalid data given"),
                 };
             }
-            return $totalPoints;
         }
+        return $totalPoints;
     }
 
     private function roundTwo(): int

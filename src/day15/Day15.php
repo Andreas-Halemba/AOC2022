@@ -2,10 +2,7 @@
 
 namespace App\day15;
 
-function nl(string $string): void
-{
-    print_r($string . PHP_EOL);
-}
+use App\GlobalHelpers;
 
 class Day15
 {
@@ -38,19 +35,29 @@ class Day15
 
     public function solve()
     {
-        $range = $this->part1();
-        nl("solution part 1 = " . $range);
-        for ($i = 0; $i < $this->maxX; $i++) {
-            $range = $this->getRangesOfLine($this->getSensorGrid(), $i);
-        }
+        $grid = $this->getSensorGrid(true);
+        $res = $this->part1($grid);
+        // $this->drawGrid($grid);
+        GlobalHelpers::nl("solution part 1 = " . $res);
+        $grid = $this->getSensorGrid(false);
+        $res = $this->part2($grid);
+        GlobalHelpers::nl("solution part 2 = " . $res);
     }
 
-    public function part1()
+    public function part1($grid)
     {
-        /** min max geht so leider nicht ich brauch die range mit allen
-         *  min max und unterbrechnungen. Die overlaps müssen hier gecheckt werden.
-         */
-        return $this->getRangesOfLine($this->getSensorGrid(true), $this->finalLine);
+        $result = $this->getRangesOfLine($grid, $this->finalLine)[0];
+        var_dump($result);
+        return $result[1] - $result[0];
+    }
+
+    public function part2($grid)
+    {
+        for ($i = 0; $i < 4000000; $i++) {
+            if (count($res = $this->getRangesOfLine($grid, $i)) > 1) {
+                return ($res[0][1] + 1) * 4000000 + $i;
+            }
+        }
     }
 
     public function getSensorGrid(bool $setMinMax = false): array
@@ -70,8 +77,13 @@ class Day15
                 $maxx[] = $sx + $distance;
                 $miny[] = $sy - $distance;
                 $maxy[] = $sy + $distance;
+                $this->minY = min($miny);
+                $this->maxY = max($maxy);
+                $this->minX = min($minx);
+                $this->maxX = max($maxx);
             }
         }
+
         return $sensorGrid;
     }
 
@@ -84,21 +96,62 @@ class Day15
                 'y' => $y,
             ] = $sensor;
             $rest = $d - abs($line - $y);
-            if ($rest <= 0) {
+            if ($rest < 0) {
                 continue;
             }
-            $ranges[] = [$x - $rest, $x + $rest,];
-        }
-        if (!isset($ranges)) {
-            return false;
+            $ranges[] = [$x - $rest, $x + $rest];
         }
         asort($ranges);
-        $min = $this->maxY;
-        $max = $this->minY;
-        foreach ($ranges as $key => $range) {
-            $min = ($range[0] < $min) ? $range[0] : $min;
-            $max = ($range[1] > $max) ? $range[1] : $max;
+        // GlobalHelpers::nl("line $line");
+        $ranges = array_values($ranges);
+        $consolidate = [];
+        [$start, $end] = $ranges[0];
+        for ($i = 1; $i < count($ranges); $i++) {
+            if ($end >= $ranges[$i][0]) {
+                $end = max($end, $ranges[$i][1]);
+            } else {
+                $consolidate[] = [$start, $end];
+                [$start, $end] = $ranges[$i];
+            }
         }
-        return $max - $min;
+        if (!in_array([$start, $end], $consolidate)) {
+            $consolidate[] = [$start, $end];
+        }
+        return $consolidate;
+    }
+
+    public function drawGrid($grid)
+    {
+        $paintPlane = array_fill(
+            $this->minY,
+            $this->maxY - $this->minY + 2,
+            array_fill(
+                $this->minX,
+                $this->maxX - $this->minX + 2,
+                '.'
+            )
+        );
+        foreach ($grid as $sensor) {
+            $paintPlane[$sensor['y']][$sensor['x']] = 'S';
+            $paintPlane[$sensor['by']][$sensor['bx']] = 'B';
+            foreach ($paintPlane as $lineNumber => $paintLine) {
+                $width = $sensor['d'] - abs($lineNumber - $sensor['y']);
+                if ($width < 0) {
+                    continue;
+                }
+                if ($width === 0) {
+                    $paintPlane[$lineNumber][$sensor['x']] = '#';
+                    continue;
+                }
+                for ($i = $sensor['x'] - $width; $i < $sensor['x'] + $width + 1; $i++) {
+                    $paintPlane[$lineNumber][$i] =
+                        $paintPlane[$lineNumber][$i] === '.' ? '#' : $paintPlane[$lineNumber][$i];
+                }
+            }
+        }
+        foreach ($paintPlane as $y => $line) {
+            ksort($line);
+            GlobalHelpers::nl($y . ">\t" . implode('', $line));
+        }
     }
 }

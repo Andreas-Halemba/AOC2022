@@ -16,7 +16,6 @@ if (!isset($_GET['day'])) {
         // instantiate a dynmic class for the day
         [$round1, $round2] = (new $className('input'))->solve();
         echo "</pre>";
-        
         // display the results as table
         if ($round1 && $round2) {
             echo "<table>";
@@ -28,7 +27,7 @@ if (!isset($_GET['day'])) {
 } else {
     $className = "App\\day" . $_GET['day'] . "\\Day" . $_GET['day'];
     echo '<pre style="background-color: black; color: #ddd; padding: 20px">';
-    [$round1, $round2] = (new $className('input'))->solve();
+    [$round1, $round2] = (new $className($_GET['mode'] ?? 'test'))->solve();
     echo "</pre>";
     // display the results as table
     if ($round1 || $round2) {

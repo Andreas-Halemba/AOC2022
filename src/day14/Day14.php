@@ -5,6 +5,7 @@ namespace App\day14;
 class Day14
 {
     private array $grid = [];
+    private array $input;
     public function __construct($mode)
     {
         $this->input = match ($mode) {

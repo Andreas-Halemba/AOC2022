@@ -29,6 +29,6 @@ match ($argv[1]) {
     'day11' => new Day11($argv[2] ?? 'test'),
     'day12' => (new Day12($argv[2] ?? 'test'))->solve(),
     'day14' => (new Day14($argv[2] ?? 'test'))->solve(),
-    'day15' => (new Day15($argv[2] ?? null))->solve(1),
+    'day15' => (new Day15($argv[2] ?? 'test'))->solve(),
     default => print_r("wrong day given")
 };
